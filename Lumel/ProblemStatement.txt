@@ -1,0 +1,58 @@
+﻿
+
+**Section B: API Systems Design**
+**Systems – API Design – Medium**
+
+**The "Flash Sale" Inventory Reservation API**
+
+Problem Statement:
+Design and implement a set of RESTful endpoints for a high-traffic "Flash Sale" system. You are managing the inventory for a single high-demand product (e.g., a concert ticket or limited edition sneaker).
+The system must handle concurrent requests and ensure that we never oversell the inventory.
+**Requirements**:
+1. **Initialize**: Endpoint to set the total inventory count (Admin only).
+2. **Reserve**: Endpoint for a user to reserve an item.
+    ◦ If inventory > 0, decrement inventory and return a `reservation_id`.
+    ◦ Reservations expire after 5 minutes if not confirmed (mock this logic or explain how you would handle the expiry in a real system).
+    ◦ If inventory = 0, add the user to a "Waitlist" and return a specific status.
+3. **Status**: Endpoint to check the current available inventory and waitlist size.
+**Constraints**:
+• Assume the data is stored in memory for this exercise, but code must be thread-safe or handle concurrency conceptually (e.g., using mutexes, atomic operations, or appropriate database locking pseudo-code).
+• Focus on appropriate HTTP status codes (200, 201, 409, 429).
+• Input format: JSON.
+Example Request:
+POST /reserve
+Body: { "user_id": "user_123" }
+Example Response (Success):
+201 Created
+Body: { "reservation_id": "res_555", "expires_at": "2023-10-27T10:05:00Z" }
+Example Response (Sold Out):
+202 Accepted
+Body: { "message": "Added to waitlist", "waitlist_position": 45 }
+
+**Section C: Data Persistence**
+**Database – SQL – Medium**
+**Driver Delivery Performance Analysis**
+
+Problem Statement:
+You have a database table deliveries tracking package drop-offs.
+Schema:
+• `id` (int, PK)
+• `driver_id` (int)
+• `delivery_status` (varchar: 'COMPLETED', 'FAILED', 'LATE')
+• `attempt_timestamp` (datetime)
+Write a SQL query to identify "Reliable Drivers".
+A "Reliable Driver" is defined as a driver who has:
+1. Completed at least 5 deliveries in the month of **September 2024**.
+2. Maintained a 'COMPLETED' rate of **90% or higher** for that month.
+Output Columns: driver_id, total_deliveries, success_rate (percentage).
+Ordering: Order by success_rate descending.
+
+### Additional Notes:
+
+- Focus on demonstrating your understanding of backend development principles, data modeling, API design, and data analysis.
+- Consider performance optimization techniques, especially if you are dealing with large datasets.
+- Clearly document your code and design decisions to explain your thought process.
+
+### Submission
+
+- Share the github link through email

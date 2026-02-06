@@ -37,7 +37,7 @@ namespace Lumel.Controllers
                     completedOrderCount = x.Count()
                 })
                 .OrderByDescending(x => x.completedOrderCount)
-                .Skip(pageNumber * pageSize)
+                .Skip((pageNumber -1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
             ;
@@ -45,7 +45,7 @@ namespace Lumel.Controllers
                 Select(x => new
                 {
                     driverId = x.driverId,
-                    successRate = x.completedOrderCount / totalDeliverOfMonth
+                    successRate = (totalDeliverOfMonth/x.completedOrderCount) * 100 
                 });
             return Ok(result);
 
