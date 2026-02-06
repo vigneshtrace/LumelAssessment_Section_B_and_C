@@ -28,6 +28,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Redirect root to Swagger
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseRouting();
