@@ -41,6 +41,8 @@ namespace Lumel.Controllers
                 .Take(pageSize)
                 .ToListAsync();
             ;
+            //I calculated successRate with total orders across the drivers here, But I need to
+            //calcular per driver level sucessrate, for that, I would use  window function in sql
             var result = fetchedData.
                 Select(x => new
                 {
